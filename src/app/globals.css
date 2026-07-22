@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   PALETA PLACEHOLDER — trocar quando a cliente enviar as cores oficiais
+   -----------------------------------------------------------------------------
+   Objetivo do briefing: transmitir "competência + acolhimento".
+   - primary : verde-azulado suave (calma, confiança)
+   - accent  : terracota suave (CTAs, calor humano)
+   - sand    : off-white quente (fundo — evita o branco/preto puro, mais frio)
+   - ink     : cinza-chumbo (texto)
+   Valores em canais RGB (r g b) para funcionarem com a opacidade do Tailwind.
+   ============================================================================= */
+:root {
+  --color-primary: 45 106 106; /* #2D6A6A teal profundo */
+  --color-primary-dark: 32 79 79; /* #204F4F */
+  --color-primary-light: 138 184 181; /* #8AB8B5 */
+
+  --color-accent: 198 108 78; /* #C66C4E terracota */
+  --color-accent-dark: 168 86 60; /* #A8563C */
+
+  --color-sand: 247 243 236; /* #F7F3EC off-white quente (fundo) */
+  --color-surface: 255 255 255; /* #FFFFFF cartões */
+  --color-ink: 42 51 51; /* #2A3333 texto principal */
+  --color-ink-soft: 90 102 102; /* #5A6666 texto secundário */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* compensa a navbar fixa ao rolar até as âncoras */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: rgb(var(--color-sand));
+    color: rgb(var(--color-ink));
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-primary) / 0.18);
+  }
+
+  /* Anel de foco visível para navegação por teclado (acessibilidade) */
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  .section-pad {
+    @apply py-20 sm:py-28;
+  }
+
+  /* Kicker / rótulo de seção */
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-primary;
+  }
+
+  .heading-2 {
+    @apply font-serif text-3xl leading-tight text-ink sm:text-4xl;
+  }
+
+  .prose-soft {
+    @apply text-base leading-relaxed text-ink-soft sm:text-lg;
+  }
+}
+
+/* Respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
